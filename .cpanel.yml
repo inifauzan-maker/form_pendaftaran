@@ -16,8 +16,8 @@ deployment:
     # Jalankan migrasi database bila diperlukan (hapus jika tidak diinginkan)
     - /usr/bin/php $DEPLOYPATH/artisan migrate --force
 
-    # Build asset frontend (gunakan npm ci + build; pastikan Node tersedia, jika tidak bisa dihapus)
-    - cd $DEPLOYPATH && /usr/bin/npm ci
+    # Build asset frontend
+    - cd $DEPLOYPATH && /usr/bin/npm install
     - cd $DEPLOYPATH && /usr/bin/npm run build
 
     # Pastikan storage link tersedia

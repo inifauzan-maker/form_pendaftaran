@@ -1,0 +1,24 @@
+---
+deployment:
+  tasks:
+    # Direktori tujuan deployment di server cPanel
+    - export DEPLOYPATH=/home/u1521077/public_html/artcamp.bimbelgambar.id
+
+    # Pastikan folder tujuan ada
+    - /bin/mkdir -p $DEPLOYPATH
+
+    # Salin seluruh project kecuali folder yang tidak dibutuhkan di server
+    - /bin/rsync -a --delete --exclude ".git" --exclude "node_modules" --exclude "public/storage" ./ $DEPLOYPATH/
+
+    # Install dependensi Composer (gunakan opsi --no-dev agar ringan di produksi)
+    - /usr/bin/php -d detect_unicode=0 /opt/cpanel/composer/bin/composer install --working-dir=$DEPLOYPATH --no-dev --optimize-autoloader --no-interaction
+
+    # Jalankan migrasi database bila diperlukan (hapus jika tidak diinginkan)
+    - /usr/bin/php $DEPLOYPATH/artisan migrate --force
+
+    # Build asset frontend (gunakan npm ci + build; pastikan Node tersedia, jika tidak bisa dihapus)
+    - cd $DEPLOYPATH && /usr/bin/npm ci
+    - cd $DEPLOYPATH && /usr/bin/npm run build
+
+    # Pastikan storage link tersedia
+    - /usr/bin/php $DEPLOYPATH/artisan storage:link || true

@@ -16,9 +16,10 @@ deployment:
     # Jalankan migrasi database bila diperlukan (hapus jika tidak diinginkan)
     - /usr/bin/php $DEPLOYPATH/artisan migrate --force
 
-    # Build asset frontend
-    - cd $DEPLOYPATH && /usr/bin/npm install
-    - cd $DEPLOYPATH && /usr/bin/npm run build
+    # Lewati proses build npm di server cPanel (asset hasil build diasumsikan dipush dari lokal)
+
+    # Bersihkan cache agar konfigurasi/route/view terbaru digunakan
+    - /usr/bin/php $DEPLOYPATH/artisan optimize:clear
 
     # Pastikan storage link tersedia
     - /usr/bin/php $DEPLOYPATH/artisan storage:link || true

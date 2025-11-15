@@ -19,15 +19,11 @@
                     @enderror
                 </div>
 
-                <div data-school-endpoint="{{ route('schools.index') }}">
+                <div>
                     <label for="school" class="text-sm font-medium text-slate-700">Asal Sekolah</label>
-                    <select id="school" name="school"
-                        class="mt-1 w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm @error('school') border-rose-400 @enderror"
-                        data-placeholder="Ketik nama sekolah...">
-                        @if (old('school'))
-                            <option value="{{ old('school') }}" selected>{{ old('school') }}</option>
-                        @endif
-                    </select>
+                    <input type="text" id="school" name="school"
+                        class="mt-1 w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring focus:ring-indigo-100 @error('school') border-rose-400 @enderror"
+                        value="{{ old('school') }}" placeholder="Ketik nama sekolah..." required>
                     <p class="mt-1 text-xs text-slate-500">Gunakan kata kunci untuk mencari atau tambahkan nama baru.</p>
                     @error('school')
                         <p class="mt-1 text-sm text-rose-600">{{ $message }}</p>

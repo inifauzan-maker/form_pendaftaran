@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="grid gap-6 lg:grid-cols-[2fr,1fr]">
+    <div class="mx-auto w-full max-w-3xl">
         <section class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
             <h1 class="text-2xl font-semibold text-slate-900">Form Pendaftaran Peserta</h1>
             <p class="mt-1 text-sm text-slate-500">Isi semua field wajib untuk mendapatkan kode unik dan QR kehadiran.</p>
@@ -99,20 +99,5 @@
             </form>
         </section>
 
-        <section class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 class="text-xl font-semibold text-slate-900">Alur singkat</h2>
-            <ol class="mt-4 list-decimal space-y-3 pl-6 text-sm text-slate-600">
-                <li>Isi formulir dan unggah surat ijin bila sudah tersedia.</li>
-                <li>Setiap peserta akan otomatis dibuatkan kode unik serta QR attendance.</li>
-                <li>Kode dapat dikirim ke Whatsapp peserta lewat dashboard panitia.</li>
-                <li>Panitia melakukan validasi kedatangan cukup dengan menscan QR peserta.</li>
-            </ol>
-            @can('view-dashboard')
-                <a href="{{ route('dashboard') }}"
-                    class="mt-6 inline-flex items-center justify-center rounded-lg border border-indigo-200 px-4 py-2 text-sm font-semibold text-indigo-600 hover:border-indigo-300">
-                    Buka Dashboard
-                </a>
-            @endcan
-        </section>
     </div>
 @endsection

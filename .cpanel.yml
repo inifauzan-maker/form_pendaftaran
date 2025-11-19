@@ -8,7 +8,7 @@ deployment:
     - /bin/mkdir -p $DEPLOYPATH
 
     # Salin seluruh project kecuali folder yang tidak dibutuhkan di server
-    - /bin/rsync -a --delete --exclude ".git" --exclude "node_modules" --exclude "public/storage" ./ $DEPLOYPATH/
+    - /bin/rsync -a --delete --exclude ".git" --exclude "node_modules" --exclude "public/storage" --exclude ".env" ./ $DEPLOYPATH/
 
     # Install dependensi Composer (gunakan opsi --no-dev agar ringan di produksi)
     - /usr/bin/php -d detect_unicode=0 /opt/cpanel/composer/bin/composer install --working-dir=$DEPLOYPATH --no-dev --optimize-autoloader --no-interaction
